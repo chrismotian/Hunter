@@ -6,8 +6,6 @@ public class DisableOnClick : MonoBehaviour
 {
     Vector3 touchPosition = Vector3.zero;
     Collider2D bodyCollider = null;
-    TouchPhase myPhase = TouchPhase.Began;
-    bool after = false;
     private void Start()
     {
         bodyCollider = this.GetComponent<BoxCollider2D>();
@@ -18,27 +16,41 @@ public class DisableOnClick : MonoBehaviour
         if (Input.touchCount >= 1)
         {
             touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
-            after = true;
+            if (bodyCollider.OverlapPoint(touchPosition))
+            {
+                this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
+            }
         }
-        else if(after == true)
-        {
-            myPhase = TouchPhase.Ended;
-            after = false;
-        }
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButton(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (bodyCollider.OverlapPoint(mousePosition))
             {
-                this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-                Destroy(this);
+                this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
             }
-        }else if(myPhase == TouchPhase.Ended)
-        { 
-            if (bodyCollider.OverlapPoint(touchPosition))
+        }
+        else
+        {
+            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            if (this.GetComponent<Rigidbody2D>().velocity.y < -1)
             {
-                this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-                Destroy(this);
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.GetComponent<Rigidbody2D>().velocity.y + 0.1f, this.GetComponent<Rigidbody2D>().velocity.x);
+            }
+            else if (this.GetComponent<Rigidbody2D>().velocity.y > 1)
+            {
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.GetComponent<Rigidbody2D>().velocity.y - 0.1f, this.GetComponent<Rigidbody2D>().velocity.x);
+            }
+            else if (this.GetComponent<Rigidbody2D>().velocity.x > 1)
+            {
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.GetComponent<Rigidbody2D>().velocity.y, this.GetComponent<Rigidbody2D>().velocity.x - 0.1f);
+            }
+            else if (this.GetComponent<Rigidbody2D>().velocity.x < -1)
+            {
+                this.GetComponent<Rigidbody2D>().velocity = new Vector2(this.GetComponent<Rigidbody2D>().velocity.y, this.GetComponent<Rigidbody2D>().velocity.x + 0.1f);
+            }
+            else
+            {
+                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
     }
