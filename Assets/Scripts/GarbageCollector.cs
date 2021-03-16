@@ -6,7 +6,7 @@ public class GarbageCollector : MonoBehaviour
 {
     void Update()
     {
-        if (this.transform.position.y < -5)
+        if (this.transform.position.y < -3)
         {
             Destroy(this.gameObject);
         }
