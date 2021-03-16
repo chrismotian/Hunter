@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DisableOnClick : MonoBehaviour
 {
+    Vector3 touchPosition = Vector3.zero;
     Collider2D bodyCollider = null;
+    TouchPhase myPhase = TouchPhase.Began;
+    bool after = false;
     private void Start()
     {
         bodyCollider = this.GetComponent<BoxCollider2D>();
@@ -12,26 +15,30 @@ public class DisableOnClick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.touchCount >= 1)
+        {
+            touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+            after = true;
+        }
+        else if(after == true)
+        {
+            myPhase = TouchPhase.Ended;
+            after = false;
+        }
+        if (Input.GetMouseButtonUp(0))
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
             if (bodyCollider.OverlapPoint(mousePosition))
             {
                 this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
                 Destroy(this);
             }
-        }
-        else if (Input.touchCount > 0)
-        {
-            for (int i = 0; i < Input.touchCount; i++)
+        }else if(myPhase == TouchPhase.Ended)
+        { 
+            if (bodyCollider.OverlapPoint(touchPosition))
             {
-                Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[i].position);
-                if (bodyCollider.OverlapPoint(touchPosition))
-                {
-                    this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-                    Destroy(this);
-                }
+                this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                Destroy(this);
             }
         }
     }
