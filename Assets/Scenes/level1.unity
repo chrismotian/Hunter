@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 218246913}
   - component: {fileID: 218246912}
   - component: {fileID: 218246911}
+  - component: {fileID: 218246917}
   m_Layer: 0
   m_Name: Andro (1)
   m_TagString: Untagged
@@ -156,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab35fc1b63dc6a048b80df09fcf0131e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scope: {fileID: 1970479827}
 --- !u!114 &218246912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +281,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20.23}
+--- !u!114 &218246917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218246910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc31ae0a654226547b457b2ea5c07f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomChangeEvent: {fileID: 1900725051}
 --- !u!1 &704961136
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +390,7 @@ GameObject:
   - component: {fileID: 1114249646}
   - component: {fileID: 1114249645}
   - component: {fileID: 1114249650}
+  - component: {fileID: 1114249651}
   m_Layer: 0
   m_Name: Andro
   m_TagString: Untagged
@@ -520,7 +534,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab35fc1b63dc6a048b80df09fcf0131e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scope: {fileID: 1970479827}
+--- !u!114 &1114249651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114249644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc31ae0a654226547b457b2ea5c07f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomChangeEvent: {fileID: 1900725051}
 --- !u!1 &1214412760
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1214412762}
   - component: {fileID: 1214412761}
+  - component: {fileID: 1214412763}
   m_Layer: 0
   m_Name: clear_Background
   m_TagString: Untagged
@@ -587,7 +614,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 1
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1214412762
 Transform:
@@ -603,6 +630,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1214412763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214412760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc31ae0a654226547b457b2ea5c07f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomChangeEvent: {fileID: 1900725051}
 --- !u!1 &1900725046
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,10 +747,10 @@ MonoBehaviour:
   m_RefResolutionX: 1280
   m_RefResolutionY: 720
   m_UpscaleRT: 1
-  m_PixelSnapping: 1
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 1
+  m_CropFrameY: 1
+  m_StretchFill: 1
 --- !u!114 &1900725051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +765,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomFactor: 600
   cameraFollow: {fileID: 1900725053}
-  scope: {fileID: 0}
 --- !u!114 &1900725052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd49affeb15de04e999aac3b52b8e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomChangeEvent: {fileID: 1900725051}
   scrollingEnabled: 0
   moveAmount: 5
   edgeSize: 500
@@ -912,7 +952,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33ad5a679633184baebe15847d20525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBackground: {fileID: 1214412761}
-  enemyList:
-  - {fileID: 1114249644}
-  - {fileID: 218246910}
+  zoomChangeEvent: {fileID: 1900725051}
