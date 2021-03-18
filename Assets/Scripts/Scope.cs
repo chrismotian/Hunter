@@ -22,14 +22,16 @@ public class Scope : MonoBehaviour
         if (Input.touchCount >= 1)
         {
             touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
-            mousePosition = Camera.main.ScreenToWorldPoint(touchPosition);
+            transform.position = new Vector3(touchPosition.x, touchPosition.y, 0);
         }
         else if (SystemInfo.deviceType != DeviceType.Handheld) { 
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+        }else { 
+            transform.position = Vector2.zero;
         }
-        transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-            
-        
+
+
     }
     private void ZoomByControl_OnZoomChange(object sender, ZoomByControl.OnZoomChangeEventArgs e)
     {
