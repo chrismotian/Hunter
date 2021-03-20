@@ -8,7 +8,7 @@ public class TakeByCollision : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D takeaway)
     {
-        if (!takeaway.isTrigger && numberOfTakeAways == 0)
+        if (takeaway.tag=="TakeAway" && numberOfTakeAways == 0)
         {
             numberOfTakeAways = 1;
             Destroy(takeaway.gameObject.GetComponent<Rigidbody2D>());

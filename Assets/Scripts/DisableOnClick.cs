@@ -6,6 +6,7 @@ public class DisableOnClick : MonoBehaviour
 {
     Vector3 touchPosition = Vector3.zero;
     Collider2D bodyCollider = null;
+    [SerializeField] GameObject soundmanager = null;
     private void Start()
     {
         bodyCollider = this.GetComponent<BoxCollider2D>();
@@ -15,6 +16,7 @@ public class DisableOnClick : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
+            soundmanager.GetComponent<AudioSource>().Play();
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (bodyCollider.OverlapPoint(mousePosition))
             {

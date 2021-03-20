@@ -18,7 +18,7 @@ public class ScrollByControl : MonoBehaviour
 
     void Start()
     {
-        maxScrollingValueX = 4.21875f / 2;
+        maxScrollingValueX = 4.21875f / 4;
         maxScrollingValueY = 4.21875f / 3.2f;
         cameraFollow.Setup(() => cameraFollowPosition);
 
@@ -33,7 +33,7 @@ public class ScrollByControl : MonoBehaviour
         }
         if (scrollingEnabled)
         {
-            if ((Input.mousePosition.x > Screen.width - edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.x < maxScrollingValueX)
+            if ((Input.mousePosition.x > Screen.width - edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.x <  maxScrollingValueX)
             {
                 cameraFollowPosition.x += moveAmount * Time.deltaTime;
             }
