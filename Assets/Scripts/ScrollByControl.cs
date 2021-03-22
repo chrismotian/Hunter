@@ -9,7 +9,7 @@ public class ScrollByControl : MonoBehaviour
     [SerializeField] ZoomByControl zoomChangeEvent = null;
     bool scrollingEnabled = false;
     [SerializeField] float moveAmount = 10f;
-    [SerializeField] float edgeSize = 500f;
+    [SerializeField] float edgeSize = 50f;
     public CameraFollow cameraFollow;
     float maxScrollingValueX = 5;
     float maxScrollingValueY = 4;
@@ -18,8 +18,8 @@ public class ScrollByControl : MonoBehaviour
 
     void Start()
     {
-        maxScrollingValueX = 4.21875f / 4;
-        maxScrollingValueY = 4.21875f / 3.2f;
+        maxScrollingValueX = 4.21875f / 8;
+        maxScrollingValueY = 4.21875f / 2f;
         cameraFollow.Setup(() => cameraFollowPosition);
 
         zoomChangeEvent.OnZoomChange += ZoomByControl_OnZoomChange;
@@ -41,11 +41,11 @@ public class ScrollByControl : MonoBehaviour
             {
                 cameraFollowPosition.x -= moveAmount * Time.deltaTime;
             }
-            else if ((Input.mousePosition.y > Screen.height - edgeSize / 2 || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.y < maxScrollingValueY)
+            else if ((Input.mousePosition.y > Screen.height - edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.y < maxScrollingValueY)
             {
                 cameraFollowPosition.y += moveAmount * Time.deltaTime;
             }
-            else if ((Input.mousePosition.y < edgeSize / 2 || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.y > -maxScrollingValueY)
+            else if ((Input.mousePosition.y < edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.y > -maxScrollingValueY)
             {
                 cameraFollowPosition.y -= moveAmount * Time.deltaTime;
             }

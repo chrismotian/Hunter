@@ -18,36 +18,37 @@ public class Scope : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.touchCount >= 1)
+        if (scopeEnabled)
         {
-            touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
-            transform.position = new Vector3(touchPosition.x, touchPosition.y, 0);
+            if (Input.touchCount >= 1)
+            {
+                touchPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+                transform.position = new Vector3(touchPosition.x, touchPosition.y, 0);
+            }
+            else if (SystemInfo.deviceType != DeviceType.Handheld)
+            {
+                mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
+            }
+            else
+            {
+                transform.position = Vector2.zero;
+            }
         }
-        else if (SystemInfo.deviceType != DeviceType.Handheld) { 
-            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);
-        }else { 
-            transform.position = Vector2.zero;
-        }
-
-
     }
     private void ZoomByControl_OnZoomChange(object sender, ZoomByControl.OnZoomChangeEventArgs e)
     {
         if (e.In)
         {
             scopeEnabled = true;
-            this.GetComponent<SpriteRenderer>().sortingOrder = 2;
-            this.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
             this.transform.localScale = new Vector3(1, 1, 1);
+            this.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
             scopeEnabled = false;
-            this.GetComponent<SpriteRenderer>().sortingOrder = 5;
-            this.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
             this.transform.localScale = new Vector3(2, 2, 2);
+            this.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     private void OnDestroy()
