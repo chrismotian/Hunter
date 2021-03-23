@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3821701}
   - component: {fileID: 3821700}
   m_Layer: 0
-  m_Name: TakeAwayshop
+  m_Name: TakeAwayRestaurant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 1913606593}
   - component: {fileID: 1913606592}
   m_Layer: 0
-  m_Name: Droneshop
+  m_Name: UAVFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1000,7 +1000,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: fe91d91349391e34ab6f4afe32a8cc54, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
