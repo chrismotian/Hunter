@@ -6,7 +6,6 @@ using PolyNav;
 [RequireComponent(typeof(PolyNavAgent))]
 public class PatrolWaypoints : MonoBehaviour
 {
-
     public List<Vector2> WPoints = new List<Vector2>();
     private int currentIndex = -1;
 
