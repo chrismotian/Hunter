@@ -7,7 +7,6 @@ public class MoveWithPulseRandomAndSpawn : MonoBehaviour
     [SerializeField] bool spawn = true;
     GameObject instance = null;
     [SerializeField] GameObject spawnGameObject = null;
-    // Start is called before the first frame update
     // area is defined by your start position.x +areaX and similar for y
     [SerializeField] float areaX = 4;
     [SerializeField] float areaY = 2;
@@ -18,11 +17,11 @@ public class MoveWithPulseRandomAndSpawn : MonoBehaviour
     bool plusX = true;
     bool targetReached = false;
     List<bool> directionList = null;
-    [SerializeField] float pulse = 2;
-    float time = 2;
-    float period = 0;
+    [SerializeField] float pulseTime = 2;
+    float timePerStepTemp = 2;
+    float timePerStep = 0;
     [SerializeField] Vector2 target = Vector2.zero;
-    // Start is called before the first frame update
+
     void Start()
     {
         startX = this.transform.position.x;
@@ -32,64 +31,96 @@ public class MoveWithPulseRandomAndSpawn : MonoBehaviour
         if (Vector2.Distance(this.transform.position, target) > 0)
         {
             directionList = CalculateDirection();
-            directionList.Reverse();
         }
         else
         {
             targetReached = true;
         }
-        period = directionList.Count / pulse;
-        time = 1 / period;
+        timePerStep = pulseTime / directionList.Count;
+        timePerStepTemp = timePerStep;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!targetReached)
         {
-            time = time - Time.deltaTime;
-            if (time < 0)
+            if (timePerStepTemp < 0)
             {
-                if (directionList[directionList.Count - 1])
+                Vector2 newPosition = Vector2.zero;
+                int countList = directionList.Count;
+                bool nextStepX = directionList[countList - 1];
+                bool nextnextStepX = directionList[countList - 2];
+                if ((nextStepX && !nextnextStepX) || (!nextStepX && nextnextStepX))
+                {
+                    if (plusX && plusY)
+                    {
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x + 0.1f, transform.position.y + 0.1f));
+                    }
+                    else if (plusX && !plusY)
+                    {
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x + 0.1f, transform.position.y - 0.1f));
+                    }
+                    else if (!plusX && plusY)
+                    {
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x - 0.1f, transform.position.y + 0.1f));
+                    }
+                    else //if(!plusX && !plusY)
+                    {
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x - 0.1f, transform.position.y - 0.1f));
+                    }
+                    directionList.RemoveAt(countList - 1);
+                    directionList.RemoveAt(countList - 2);
+                    timePerStepTemp = timePerStepTemp - timePerStep;
+                }
+                else if (nextStepX)
                 {
                     if (plusX)
                     {
-                        transform.position = new Vector2(transform.position.x + 0.1f, transform.position.y);
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x + 0.1f, transform.position.y));
                     }
                     else
                     {
-                        transform.position = new Vector2(transform.position.x - 0.1f, transform.position.y);
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x - 0.1f, transform.position.y));
                     }
+                    directionList.RemoveAt(countList - 1);
                 }
-                else
+                else //if(!nextStepX)
                 {
                     if (plusY)
                     {
-                        transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x, transform.position.y + 0.1f));
                     }
                     else
                     {
-                        transform.position = new Vector2(transform.position.x, transform.position.y - 0.1f);
+                        newPosition = PixelPerfectClamp(new Vector2(transform.position.x, transform.position.y - 0.1f));
                     }
+                    directionList.RemoveAt(countList - 1);
                 }
-                directionList.RemoveAt(directionList.Count - 1);
-                if (directionList.Count == 0)
+                transform.position = newPosition;
+                if (countList <= 3)
                 {
                     targetReached = true;
                     Destroy(instance);
+                    timePerStepTemp = timePerStepTemp - Time.deltaTime + (timePerStep * countList);
                 }
-                time = 1 / period;
+                else
+                {
+                    timePerStepTemp = timePerStep - Time.deltaTime - timePerStepTemp;
+                }
+            }
+            else
+            {
+                timePerStepTemp = timePerStepTemp - Time.deltaTime;
             }
         }
         else
         {
             targetReached = false;
-            target = new Vector2(startX + (int)(Random.Range(1, 11) * Random.Range(1, areaY + 1)) * 0.1f, startY + (int)(Random.Range(1, 11) * Random.Range(1, areaY + 1)) * 0.1f);
+            target = new Vector2(startX + (int)(Random.Range(1, 11) * Random.Range(1, areaX + 1)) * 0.1f, startY + (int)(Random.Range(1, 11) * Random.Range(1, areaY + 1)) * 0.1f);
             if (spawn) Spawn(target);
             directionList = CalculateDirection();
-            directionList.Reverse();
-            period = directionList.Count / pulse;
-            time = 1 / period;
+            timePerStep = pulseTime / directionList.Count;
+            timePerStepTemp = timePerStep - Time.deltaTime + timePerStepTemp;
         }
     }
     List<bool> CalculateDirection()
@@ -118,7 +149,7 @@ public class MoveWithPulseRandomAndSpawn : MonoBehaviour
         {
             if (unitDiffX == unitDiffY)
             {
-                for (int i = 0; i < unitDiffX / 0.1; i++)
+                for (int i = 0; i < unitDiffX / 0.1f; i++)
                 {
                     commandos.Add(true);
                     commandos.Add(false);
@@ -142,7 +173,6 @@ public class MoveWithPulseRandomAndSpawn : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-
         Gizmos.DrawSphere(target, 0.1f);
     }
 
@@ -150,5 +180,15 @@ public class MoveWithPulseRandomAndSpawn : MonoBehaviour
     {
         instance = (GameObject)Instantiate(spawnGameObject, targetPosition, Quaternion.identity);
         Invoke("Spawn", 0);
+    }
+
+    private Vector2 PixelPerfectClamp(Vector2 moveVector)
+    {
+        Vector2 vectorInPixels = new Vector2(
+            Mathf.RoundToInt(moveVector.x * 10),
+            Mathf.RoundToInt(moveVector.y * 10));
+
+        return vectorInPixels /10 ;
+            
     }
 }
