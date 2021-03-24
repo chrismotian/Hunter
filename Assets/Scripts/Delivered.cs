@@ -18,7 +18,7 @@ public class Delivered : MonoBehaviour
     void Update()
     {
         PatrolWaypoints route = null;
-        if (this.transform.parent.TryGetComponent<PatrolWaypoints>(out route))
+        if (this.transform.parent.TryGetComponent<PatrolWaypoints>(out route) && this.gameObject.tag != "Enemy")
         {
             route.WPoints[0] = new Vector2(1f, -5f);
             route.WPoints[1] = new Vector2(1f, -1f);
@@ -27,7 +27,7 @@ public class Delivered : MonoBehaviour
             route.WPoints[4] = new Vector2(2f, 3f);
             route.WPoints[5] = new Vector2(2f, -4f);
         }
-        if (customerCollider.OverlapPoint(this.transform.position))
+        if (customerCollider != null && customerCollider.OverlapPoint(this.transform.position))
         {
             this.GetComponentInParent<TakeByCollision>().numberOfTakeAways = 0;
             Destroy(TakeAwayOrder);
