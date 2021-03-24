@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Delivered : MonoBehaviour
 {
+    Vector2 originalPosition = Vector2.zero;
+    int indexAtTake = 0;
     GameObject TakeAwayOrder;
     GameObject Customer;
     [SerializeField] Collider2D customerCollider = null;
@@ -17,26 +19,26 @@ public class Delivered : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PatrolWaypoints route = null;
-        if (this.transform.parent.TryGetComponent<PatrolWaypoints>(out route) && this.gameObject.tag != "Enemy")
+        MoveWithPulseAndSpawn route = null;
+        if (this.transform.parent.TryGetComponent<MoveWithPulseAndSpawn>(out route))
         {
-            route.WPoints[0] = new Vector2(1f, -5f);
-            route.WPoints[1] = new Vector2(1f, -1f);
-            route.WPoints[2] = new Vector2(Customer.transform.position.x, Customer.transform.position.y);
-            route.WPoints[3] = new Vector2(0f, 3f);
-            route.WPoints[4] = new Vector2(2f, 3f);
-            route.WPoints[5] = new Vector2(2f, -4f);
+            if (this.transform.parent.gameObject.tag == "Friend")
+            {
+                indexAtTake = route.currentIndex;
+                originalPosition = route.waypoints[indexAtTake + 1];
+                route.waypoints[indexAtTake + 1] = Customer.transform.position;
+            }else if(this.transform.parent.gameObject.tag == "Enemy"){
+                for (int i = 0; i < route.waypoints.Count; i++)
+                {
+                    route.waypoints[i] = new Vector2(-5, 0);
+                }
+            }
         }
         if (customerCollider != null && customerCollider.OverlapPoint(this.transform.position))
         {
             this.GetComponentInParent<TakeByCollision>().numberOfTakeAways = 0;
             Destroy(TakeAwayOrder);
-            route.WPoints[0] = new Vector2(1f, -5f);
-            route.WPoints[1] = new Vector2(1f, 3f);
-            route.WPoints[2] = new Vector2(-1f, 4f);
-            route.WPoints[3] = new Vector2(0.5f, 5f);
-            route.WPoints[4] = new Vector2(2f, 4f);
-            route.WPoints[5] = new Vector2(2f, -4f);
+            route.waypoints[indexAtTake + 1] = originalPosition;
             Destroy(this.gameObject);
         }
     }

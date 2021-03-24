@@ -7,7 +7,7 @@ public class MoveWithPulseAndSpawn : MonoBehaviour
     [SerializeField] bool spawn = true;
     GameObject instance = null;
     [SerializeField] GameObject spawnGameObject = null;
-    int currentIndex;
+    public int currentIndex;
     bool plusY = true;
     bool plusX = true;
     bool targetReached = false;
@@ -15,7 +15,7 @@ public class MoveWithPulseAndSpawn : MonoBehaviour
     [SerializeField] float pulseTime = 2;
     float timePerStepTemp = 2;
     float timePerStep = 0;
-    [SerializeField] List<Vector2> waypoints = null;
+    public List<Vector2> waypoints = null;
 
     void Start()
     {

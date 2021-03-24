@@ -75,7 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea18bc96a9981c040984955f3084fd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundmanager: {fileID: 0}
 --- !u!1 &5210929110019901564
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,11 +120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3741602090160373976, guid: 8a2c5ba66650b9841b7868cdff0f9721, type: 3}
       propertyPath: m_Size.x
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3741602090160373976, guid: 8a2c5ba66650b9841b7868cdff0f9721, type: 3}
       propertyPath: m_Size.y
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3741602090160373976, guid: 8a2c5ba66650b9841b7868cdff0f9721, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -145,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3741602090160373976, guid: 8a2c5ba66650b9841b7868cdff0f9721, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.33
+      value: 0.2578125
       objectReference: {fileID: 0}
     - target: {fileID: 3741602090160373976, guid: 8a2c5ba66650b9841b7868cdff0f9721, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.47
+      value: 0.3671875
       objectReference: {fileID: 0}
     - target: {fileID: 3741602090160373976, guid: 8a2c5ba66650b9841b7868cdff0f9721, type: 3}
       propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
