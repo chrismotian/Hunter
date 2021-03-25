@@ -164,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3821699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5298488266190214704, guid: 60e3166284078f941aa992b8e0b71d4f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4664750644999617561, guid: 60e3166284078f941aa992b8e0b71d4f, type: 3}
@@ -378,7 +378,7 @@ MonoBehaviour:
   - {x: 1, y: 5}
   - {x: 2, y: 4}
   - {x: 2, y: -3}
-  - {x: 1, y: -4}
+  - {x: 1, y: -4.6}
   - {x: 1, y: -3.5}
   - {x: 1, y: -3}
   - {x: 1, y: -1}
@@ -406,7 +406,7 @@ MonoBehaviour:
   pulseTime: 3.1
   waypoints:
   - {x: 2, y: -3}
-  - {x: 1, y: -4}
+  - {x: 1, y: -4.6}
   - {x: 1, y: -3.5}
   - {x: 1, y: -3}
   - {x: 1, y: -1}
@@ -428,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6411029972017862567, guid: 7e8667bcc2282fe41b8285eba9a71156, type: 3}
       propertyPath: WPoints.Array.data[0].y
-      value: -5
+      value: -4.475
       objectReference: {fileID: 0}
     - target: {fileID: 6411029972017862567, guid: 7e8667bcc2282fe41b8285eba9a71156, type: 3}
       propertyPath: WPoints.Array.data[1].x
@@ -636,7 +636,7 @@ MonoBehaviour:
   - {x: 1, y: 5}
   - {x: 2, y: 4}
   - {x: 2, y: -3}
-  - {x: 1, y: -4}
+  - {x: 1, y: -4.6}
   - {x: 1, y: -3.5}
   - {x: 1, y: -3}
   - {x: 1, y: -1}
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   - {x: 1, y: 5}
   - {x: 2, y: 4}
   - {x: 2, y: -3}
-  - {x: 1, y: -4}
+  - {x: 1, y: -4.6}
 --- !u!1 &1415413536 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8239401339409274470, guid: 7e8667bcc2282fe41b8285eba9a71156, type: 3}
@@ -1338,14 +1338,14 @@ MonoBehaviour:
   spawn: 0
   spawnGameObject: {fileID: 0}
   currentIndex: 0
-  pulseTime: 3.4
+  pulseTime: 2.8
   waypoints:
   - {x: 1, y: 3}
   - {x: 0, y: 4}
   - {x: 1, y: 5}
   - {x: 2, y: 4}
   - {x: 2, y: -3}
-  - {x: 1, y: -4}
+  - {x: 1, y: -4.6}
   - {x: 1, y: -3.5}
   - {x: 1, y: -3}
   - {x: 1, y: -1}
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   - {x: 1, y: 5}
   - {x: 2, y: 4}
   - {x: 2, y: -3}
-  - {x: 1, y: -4}
+  - {x: 1, y: -4.6}
   - {x: 1, y: -3.5}
   - {x: 1, y: -3}
 --- !u!4 &2088379784 stripped

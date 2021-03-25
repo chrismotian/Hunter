@@ -18,8 +18,8 @@ public class ScrollByControl : MonoBehaviour
 
     void Start()
     {
-        maxScrollingValueX = 4.21875f / 8;
-        maxScrollingValueY = 4.21875f / 2f;
+        maxScrollingValueX = 4.21875f / 6;
+        maxScrollingValueY = 4.21875f / 1.8f;
         cameraFollow.Setup(() => cameraFollowPosition);
 
         zoomChangeEvent.OnZoomChange += ZoomByControl_OnZoomChange;
@@ -33,23 +33,26 @@ public class ScrollByControl : MonoBehaviour
         }
         if (scrollingEnabled)
         {
-            if ((Input.mousePosition.x > Screen.width - edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.x <  maxScrollingValueX)
+            if ((Input.mousePosition.x > Screen.width - edgeSize || touchPosition.x > Screen.width - (edgeSize * 2)) && cameraFollow.transform.position.x <  maxScrollingValueX)
             {
                 cameraFollowPosition.x += moveAmount * Time.deltaTime;
+                cameraFollow.Setup(() => cameraFollowPosition);
             }
-            else if ((Input.mousePosition.x < edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.x > -maxScrollingValueX)
+            else if ((Input.mousePosition.x < edgeSize || touchPosition.x < (edgeSize * 2)) && cameraFollow.transform.position.x > -maxScrollingValueX)
             {
                 cameraFollowPosition.x -= moveAmount * Time.deltaTime;
+                cameraFollow.Setup(() => cameraFollowPosition);
             }
-            else if ((Input.mousePosition.y > Screen.height - edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.y < maxScrollingValueY)
+            else if ((Input.mousePosition.y > Screen.height - (edgeSize * 5) || touchPosition.y > Screen.height - (edgeSize * 20)) && cameraFollow.transform.position.y < maxScrollingValueY)
             {
                 cameraFollowPosition.y += moveAmount * Time.deltaTime;
+                cameraFollow.Setup(() => cameraFollowPosition);
             }
-            else if ((Input.mousePosition.y < edgeSize || touchPosition.x > Screen.width - edgeSize) && cameraFollow.transform.position.y > -maxScrollingValueY)
+            else if ((Input.mousePosition.y < (edgeSize * 5) || touchPosition.y < (edgeSize * 20)) && cameraFollow.transform.position.y > -maxScrollingValueY)
             {
                 cameraFollowPosition.y -= moveAmount * Time.deltaTime;
+                cameraFollow.Setup(() => cameraFollowPosition);
             }
-            cameraFollow.Setup(() => cameraFollowPosition);
         }
         else
         {
